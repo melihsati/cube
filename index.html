@@ -8,7 +8,7 @@
   </head>
   <body>
     <!-- index.html -->
-<a-scene>
+<a-scene fog="type: exponential; color: #111111; density: 0.015">
   <a-entity gltf-model="assets/base.glb" scale="4 1 4"></a-entity>
   <a-entity gltf-model="assets/base.glb" scale="4 1 4" position="4 4 0" rotation="0 0 90"></a-entity>
   <a-entity gltf-model="assets/base.glb" scale="4 1 4" position="-4 4 0" rotation="0 180 90"></a-entity>
@@ -19,25 +19,41 @@
   <a-plane position="0 3.11595 -3.79359" scale="6 8 1" material="opacity: 0.1; transparent: true; color: #ffffff"></a-plane>
   
   <!-- Étoiles dans l'espace -->
-  <a-sphere position="15 20 -30" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-20 15 -25" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="25 10 -35" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-15 25 -20" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="10 30 -28" radius="0.11" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-25 8 -32" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="18 -10 -26" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-10 -15 -30" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="30 18 -22" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-18 -8 -27" radius="0.11" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="12 -20 -33" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-28 20 -29" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="22 -5 -31" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-12 28 -24" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="8 12 -34" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  <a-sphere position="-22 -18 -25" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
-  
+  <a-entity id="stars">
+    <a-sphere position="15 20 -30" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-20 15 -25" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="25 10 -35" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-15 25 -20" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="10 30 -28" radius="0.11" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-25 8 -32" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="18 -10 -26" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-10 -15 -30" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="30 18 -22" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-18 -8 -27" radius="0.11" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="12 -20 -33" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-28 20 -29" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="22 -5 -31" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-12 28 -24" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="8 12 -34" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+    <a-sphere position="-22 -18 -25" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+  </a-entity>
   <!-- Planète Tatooine -->
   <a-sphere position="-40 15 -60" radius="8" material="src: assets/tatooine.jpg"></a-sphere>
+  
+  <!-- Soleils avec sources de lumière -->
+  <a-entity position="-50 30 -70">
+    <a-sphere radius="5" color="#ffdd00" material="emissive: #ffdd00; emissiveIntensity: 3"></a-sphere>
+    <a-light type="point" intensity="5" distance="200" decay="0.5" color="#ffdd00"></a-light>
+  </a-entity>
+  
+  <a-entity position="-30 25 -75">
+    <a-sphere radius="4" color="#ff5500" material="emissive: #ff5500; emissiveIntensity: 3"></a-sphere>
+    <a-light type="point" intensity="4" distance="180" decay="0.5" color="#ff5500"></a-light>
+  </a-entity>
+  
+  <!-- Lumière ambiante pour éclairer le vaisseau -->
+  <a-light type="ambient" intensity="0.5" color="#ffffff"></a-light>
+  <a-light type="directional" intensity="1" position="0 10 10" target="#scene"></a-light>
   
   <a-sky color="#111111"></a-sky>
 
