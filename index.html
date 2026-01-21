@@ -8,7 +8,7 @@
   </head>
   <body>
     <!-- index.html -->
-<a-scene fog="type: exponential; color: #111111; density: 0.015">
+<a-scene fog="type: exponential; color: #111111; density: 0">
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4"></a-entity>
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4" position="4 4 0" rotation="0 0 90"></a-entity>
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4" position="-4 4 0" rotation="0 180 90"></a-entity>
@@ -38,22 +38,21 @@
     <a-sphere position="-22 -18 -25" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
   </a-entity>
   <!-- Planète Tatooine -->
-  <a-sphere position="-40 15 -60" radius="8" material="src: ./assets/tatooine.jpg"></a-sphere>
+  <a-sphere position="-21.49178 15 -80.5141" radius="8" material="src: ./assets/tatooine.jpg" scale="2 2 2"></a-sphere>
   
   <!-- Soleils avec sources de lumière -->
   <a-entity position="-50 30 -70">
-    <a-sphere radius="5" color="#ffdd00" material="emissive: #ffdd00; emissiveIntensity: 3"></a-sphere>
-    <a-light type="point" intensity="5" distance="200" decay="0.5" color="#ffdd00"></a-light>
+    <a-sphere radius="5" color="#ffdd00" material="emissive: #ffdd00; emissiveIntensity: 3" position="-4.40086 35.52174 -87.84251" scale="3 3 3"></a-sphere>
+    <a-light type="point" intensity="12" distance="300" decay="0.5" color="#ffdd00"></a-light>
   </a-entity>
+  
   
   <a-entity position="-30 25 -75">
-    <a-sphere radius="4" color="#ff5500" material="emissive: #ff5500; emissiveIntensity: 3"></a-sphere>
-    <a-light type="point" intensity="4" distance="180" decay="0.5" color="#ff5500"></a-light>
+    <a-sphere radius="4" color="#ff5500" material="emissive: #ff5500; emissiveIntensity: 3" position="25.64715 0 -81.25823" scale="3 3 3"></a-sphere>
+    <a-light type="point" intensity="10" distance="280" decay="0.5" color="#ff5500"></a-light>
   </a-entity>
   
-  <!-- Lumière ambiante pour éclairer le vaisseau -->
-  <a-light type="ambient" intensity="0.5" color="#ffffff"></a-light>
-  <a-light type="directional" intensity="1" position="0 10 10" target="#scene"></a-light>
+  <a-light id="shipFill" type="ambient" intensity="0.03" color="#ffffff"></a-light>
   
   <a-sky color="#111111"></a-sky>
 
