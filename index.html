@@ -80,19 +80,40 @@
   
   <!-- HYPERESPACE (caché par défaut) -->
   <a-entity id="hyperspace" visible="false">
-    <!-- Lignes d'hyperespace penchées -->
-    <a-cylinder id="hline1" position="-3 4 -15" radius="0.02" height="8" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline2" position="2 4 -18" radius="0.02" height="10" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline3" position="-5 4 -20" radius="0.02" height="12" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline4" position="4 4 -12" radius="0.02" height="6" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline5" position="0 4 -25" radius="0.02" height="14" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline6" position="-2 4 -10" radius="0.02" height="5" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline7" position="5 4 -22" radius="0.02" height="11" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline8" position="-4 4 -16" radius="0.02" height="9" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline9" position="3 4 -28" radius="0.02" height="15" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline10" position="-1 4 -14" radius="0.02" height="7" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline11" position="1 4 -30" radius="0.02" height="16" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"></a-cylinder>
-    <a-cylinder id="hline12" position="-6 4 -19" radius="0.02" height="10" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"></a-cylinder>
+    <!-- Lignes d'hyperespace avec animations A-Frame natives -->
+    <a-cylinder id="hline1" position="-3 4 -40" radius="0.03" height="8" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: -3 4 5; dur: 400; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline2" position="2 4 -45" radius="0.03" height="10" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: 2 4 5; dur: 450; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline3" position="-5 4 -50" radius="0.03" height="12" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: -5 4 5; dur: 380; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline4" position="4 4 -35" radius="0.03" height="6" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: 4 4 5; dur: 350; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline5" position="0 4 -55" radius="0.03" height="14" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: 0 4 5; dur: 500; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline6" position="-2 4 -30" radius="0.03" height="5" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: -2 4 5; dur: 320; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline7" position="5 4 -48" radius="0.03" height="11" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: 5 4 5; dur: 420; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline8" position="-4 4 -42" radius="0.03" height="9" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: -4 4 5; dur: 390; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline9" position="3 4 -60" radius="0.03" height="15" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: 3 4 5; dur: 550; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline10" position="-1 4 -38" radius="0.03" height="7" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: -1 4 5; dur: 360; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline11" position="1 4 -65" radius="0.03" height="16" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: 1 4 5; dur: 600; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder id="hline12" position="-6 4 -44" radius="0.03" height="10" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: -6 4 5; dur: 410; loop: true; easing: linear"></a-cylinder>
+    <!-- Lignes supplémentaires pour plus de densité -->
+    <a-cylinder position="1 6 -52" radius="0.02" height="8" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: 1 6 5; dur: 430; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder position="-3 2 -47" radius="0.02" height="9" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: -3 2 5; dur: 440; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder position="4 7 -55" radius="0.02" height="7" rotation="90 0 0" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3"
+      animation="property: position; to: 4 7 5; dur: 470; loop: true; easing: linear"></a-cylinder>
+    <a-cylinder position="-5 1 -50" radius="0.02" height="11" rotation="90 0 0" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3"
+      animation="property: position; to: -5 1 5; dur: 460; loop: true; easing: linear"></a-cylinder>
   </a-entity>
   
   <a-light id="shipFill" type="ambient" intensity="0.03" color="#ffffff"></a-light>
