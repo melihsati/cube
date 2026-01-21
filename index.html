@@ -9,12 +9,12 @@
   <body>
     <!-- index.html -->
 <a-scene fog="type: exponential; color: #111111; density: 0.015">
-  <a-entity gltf-model="/cube/assets/base.glb" scale="4 1 4"></a-entity>
-  <a-entity gltf-model="/cube/assets/base.glb" scale="4 1 4" position="4 4 0" rotation="0 0 90"></a-entity>
-  <a-entity gltf-model="/cube/assets/base.glb" scale="4 1 4" position="-4 4 0" rotation="0 180 90"></a-entity>
-  <a-entity gltf-model="/cube/assets/base.glb" scale="4 1 4" position="0 4 4" rotation="90 180 0"></a-entity>
-  <a-entity gltf-model="/cube/assets/base.glb" scale="4 1 4" position="0 8 0" rotation="180 0 0"></a-entity>
-  <a-entity gltf-model="/cube/assets/fenetre.glb" scale="2.56 3.28 1.95" rotation="0 90 0" position="0 0 -3.90824"></a-entity>
+  <a-entity gltf-model="assets/base.glb" scale="4 1 4"></a-entity>
+  <a-entity gltf-model="assets/base.glb" scale="4 1 4" position="4 4 0" rotation="0 0 90"></a-entity>
+  <a-entity gltf-model="assets/base.glb" scale="4 1 4" position="-4 4 0" rotation="0 180 90"></a-entity>
+  <a-entity gltf-model="assets/base.glb" scale="4 1 4" position="0 4 4" rotation="90 180 0"></a-entity>
+  <a-entity gltf-model="assets/base.glb" scale="4 1 4" position="0 8 0" rotation="180 0 0"></a-entity>
+  <a-entity gltf-model="assets/fenetre.glb" scale="2.56 3.28 1.95" rotation="0 90 0" position="0 0 -3.90824"></a-entity>
   <!-- Vitre transparente pour fermer le cube ouvert -->
   <a-plane position="0 3.11595 -3.79359" scale="6 8 1" material="opacity: 0.1; transparent: true; color: #ffffff"></a-plane>
   
@@ -38,7 +38,7 @@
     <a-sphere position="-22 -18 -25" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
   </a-entity>
   <!-- Planète Tatooine -->
-  <a-sphere position="-40 15 -60" radius="8" material="src: /cube/assets/tatooine.jpg"></a-sphere>
+  <a-sphere position="-40 15 -60" radius="8" material="src: assets/tatooine.jpg"></a-sphere>
   
   <!-- Soleils avec sources de lumière -->
   <a-entity position="-50 30 -70">
