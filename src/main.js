@@ -9,24 +9,36 @@ const HYPERSPACE_DURATION = 5000; // 5 secondes en hyperespace
 let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse
 let hyperspaceAnimationId = null;
 
-// Positions Z initiales des lignes (pour les réinitialiser)
-const initialLinePositions = {};
+// Positions initiales des lignes (définies manuellement pour éviter les problèmes Quest)
+const initialLinePositions = {
+  hline1: { x: -3, y: 4, z: -15 },
+  hline2: { x: 2, y: 4, z: -18 },
+  hline3: { x: -5, y: 4, z: -20 },
+  hline4: { x: 4, y: 4, z: -12 },
+  hline5: { x: 0, y: 4, z: -25 },
+  hline6: { x: -2, y: 4, z: -10 },
+  hline7: { x: 5, y: 4, z: -22 },
+  hline8: { x: -4, y: 4, z: -16 },
+  hline9: { x: 3, y: 4, z: -28 },
+  hline10: { x: -1, y: 4, z: -14 },
+  hline11: { x: 1, y: 4, z: -30 },
+  hline12: { x: -6, y: 4, z: -19 }
+};
 
 // Fonction pour animer les lignes d'hyperespace
 function animateHyperspaceLines() {
   const lines = document.querySelectorAll('[id^="hline"]');
+  if (!lines || lines.length === 0) {
+    console.error("No hyperspace lines found!");
+    return;
+  }
   
-  // Sauvegarder les positions initiales
-  lines.forEach((line) => {
-    const pos = line.getAttribute('position');
-    initialLinePositions[line.id] = { x: pos.x, y: pos.y, z: pos.z };
-  });
-  
+  console.log("Starting hyperspace animation with", lines.length, "lines");
   let startTime = Date.now();
   
   function animate() {
     const elapsed = Date.now() - startTime;
-    const cycleDuration = 300; // Cycle plus rapide de 0.3 seconde
+    const cycleDuration = 400; // Cycle de 0.4 seconde
     const progress = (elapsed % cycleDuration) / cycleDuration;
     
     lines.forEach((line, index) => {
@@ -35,17 +47,21 @@ function animateHyperspaceLines() {
       const lineProgress = (progress + offset) % 1;
       
       const initialPos = initialLinePositions[line.id];
+      if (!initialPos) return;
       
       // Animation Z : les lignes arrivent de loin (-30) vers nous (5)
-      const zStart = initialPos.z; // Position Z initiale (loin)
-      const zEnd = 5; // Position finale (proche de nous)
+      const zStart = initialPos.z;
+      const zEnd = 5;
       const zPos = zStart + (lineProgress * (zEnd - zStart));
       
-      // Optionnel: agrandir la ligne quand elle approche
+      // Agrandir la ligne quand elle approche
       const scale = 0.5 + (lineProgress * 1.5);
       
-      line.setAttribute('position', `${initialPos.x} ${initialPos.y} ${zPos}`);
-      line.setAttribute('scale', `1 ${scale} 1`);
+      // Utiliser object3D directement pour de meilleures performances sur Quest
+      if (line.object3D) {
+        line.object3D.position.set(initialPos.x, initialPos.y, zPos);
+        line.object3D.scale.set(1, scale, 1);
+      }
     });
     
     hyperspaceAnimationId = requestAnimationFrame(animate);
@@ -65,9 +81,9 @@ function stopHyperspaceAnimation() {
   const lines = document.querySelectorAll('[id^="hline"]');
   lines.forEach((line) => {
     const initialPos = initialLinePositions[line.id];
-    if (initialPos) {
-      line.setAttribute('position', `${initialPos.x} ${initialPos.y} ${initialPos.z}`);
-      line.setAttribute('scale', '1 1 1');
+    if (initialPos && line.object3D) {
+      line.object3D.position.set(initialPos.x, initialPos.y, initialPos.z);
+      line.object3D.scale.set(1, 1, 1);
     }
   });
 }
