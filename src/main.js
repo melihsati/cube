@@ -9,24 +9,43 @@ const HYPERSPACE_DURATION = 5000; // 5 secondes en hyperespace
 let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse
 let hyperspaceAnimationId = null;
 
+// Positions Z initiales des lignes (pour les réinitialiser)
+const initialLinePositions = {};
+
 // Fonction pour animer les lignes d'hyperespace
 function animateHyperspaceLines() {
   const lines = document.querySelectorAll('[id^="hline"]');
+  
+  // Sauvegarder les positions initiales
+  lines.forEach((line) => {
+    const pos = line.getAttribute('position');
+    initialLinePositions[line.id] = { x: pos.x, y: pos.y, z: pos.z };
+  });
+  
   let startTime = Date.now();
   
   function animate() {
     const elapsed = Date.now() - startTime;
-    const progress = (elapsed % 500) / 500; // Cycle de 0.5 seconde
+    const cycleDuration = 300; // Cycle plus rapide de 0.3 seconde
+    const progress = (elapsed % cycleDuration) / cycleDuration;
     
     lines.forEach((line, index) => {
       // Décalage pour chaque ligne
-      const offset = (index * 0.1) % 1;
+      const offset = (index * 0.08) % 1;
       const lineProgress = (progress + offset) % 1;
       
-      // Animation Y de haut vers bas (de 8 à 0)
-      const yPos = 8 - (lineProgress * 8);
-      const currentPos = line.getAttribute('position');
-      line.setAttribute('position', `${currentPos.x} ${yPos} ${currentPos.z}`);
+      const initialPos = initialLinePositions[line.id];
+      
+      // Animation Z : les lignes arrivent de loin (-30) vers nous (5)
+      const zStart = initialPos.z; // Position Z initiale (loin)
+      const zEnd = 5; // Position finale (proche de nous)
+      const zPos = zStart + (lineProgress * (zEnd - zStart));
+      
+      // Optionnel: agrandir la ligne quand elle approche
+      const scale = 0.5 + (lineProgress * 1.5);
+      
+      line.setAttribute('position', `${initialPos.x} ${initialPos.y} ${zPos}`);
+      line.setAttribute('scale', `1 ${scale} 1`);
     });
     
     hyperspaceAnimationId = requestAnimationFrame(animate);
@@ -41,6 +60,16 @@ function stopHyperspaceAnimation() {
     cancelAnimationFrame(hyperspaceAnimationId);
     hyperspaceAnimationId = null;
   }
+  
+  // Réinitialiser les positions et scales des lignes
+  const lines = document.querySelectorAll('[id^="hline"]');
+  lines.forEach((line) => {
+    const initialPos = initialLinePositions[line.id];
+    if (initialPos) {
+      line.setAttribute('position', `${initialPos.x} ${initialPos.y} ${initialPos.z}`);
+      line.setAttribute('scale', '1 1 1');
+    }
+  });
 }
 
 // Fonction pour entrer en hyperespace
