@@ -8,8 +8,9 @@
   </head>
   <body>
     <!-- index.html -->
-<a-scene fog="type: exponential; color: #111111; density: 0">
+  <a-scene fog="type: exponential; color: #111111; density: 0">
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4"></a-entity>
+  <a-entity gltf-model="./assets/control_panels_bulk4k.glb" position="0.00878 -13.47694 -20.20816" rotation="0 180 0" scale="0.5 0.5 0.5"></a-entity>
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4" position="4 4 0" rotation="0 0 90"></a-entity>
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4" position="-4 4 0" rotation="0 180 90"></a-entity>
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4" position="0 4 4" rotation="90 180 0"></a-entity>
@@ -39,16 +40,25 @@
       <a-sphere position="8 12 -34" radius="0.1" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
       <a-sphere position="-22 -18 -25" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
     </a-entity>
-    <!-- Planète Tatooine -->
-    <a-sphere position="-21.49178 15 -80.5141" radius="8" material="src: ./assets/tatooine.jpg" scale="2 2 2"></a-sphere>
+    <!-- Planète Tatooine qui tourne sur elle-même -->
+    <a-sphere position="-21.49178 15 -80.5141" radius="8" material="src: ./assets/tatooine.jpg" scale="2 2 2"
+      animation="property: rotation; to: 0 360 0; dur: 80000; loop: true; easing: linear"></a-sphere>
     <!-- Soleils avec sources de lumière -->
-    <a-entity position="-50 30 -70">
-      <a-sphere radius="5" color="#ffdd00" material="emissive: #ffdd00; emissiveIntensity: 3" position="-4.40086 35.52174 -87.84251" scale="3 3 3"></a-sphere>
-      <a-light type="point" intensity="12" distance="300" decay="0.5" color="#ffdd00"></a-light>
+    <!-- Soleil jaune tournant autour de Tatooine (plus rapide - 100 secondes) -->
+    <a-entity position="-21.49178 15 -80.5141"
+      animation="property: rotation; to: 0 360 0; dur: 100000; loop: true; easing: linear">
+      <a-entity position="-28.50914 15 -7.34341">
+        <a-sphere radius="5" color="#ffdd00" material="emissive: #ffdd00; emissiveIntensity: 3" scale="3 3 3"></a-sphere>
+        <a-light type="point" intensity="12" distance="300" decay="0.5" color="#ffdd00"></a-light>
+      </a-entity>
     </a-entity>
-    <a-entity position="-30 25 -75">
-      <a-sphere radius="4" color="#ff5500" material="emissive: #ff5500; emissiveIntensity: 3" position="25.64715 0 -81.25823" scale="3 3 3"></a-sphere>
-      <a-light type="point" intensity="10" distance="280" decay="0.5" color="#ff5500"></a-light>
+    <!-- Soleil orange tournant autour de Tatooine (plus lent - 150 secondes) -->
+    <a-entity position="-21.49178 15 -80.5141"
+      animation="property: rotation; to: 0 360 0; dur: 150000; loop: true; easing: linear">
+      <a-entity position="47.14893 0 -0.74182">
+        <a-sphere radius="4" color="#ff5500" material="emissive: #ff5500; emissiveIntensity: 3" scale="3 3 3"></a-sphere>
+        <a-light type="point" intensity="10" distance="280" decay="0.5" color="#ff5500"></a-light>
+      </a-entity>
     </a-entity>
   </a-entity>
   
@@ -68,7 +78,7 @@
       <a-sphere position="-22 -5 -32" radius="0.11" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
     </a-entity>
     <!-- Grande nébuleuse bleue/violette -->
-    <a-sphere position="0 10 -100" radius="25" material="color: #2244aa; emissive: #1133aa; emissiveIntensity: 0.5; opacity: 0.6; transparent: true"></a-sphere>
+    <a-sphere position="0 10 -100" radius="25" material="src: ./assets/Hoth.png" material="color: #2244aa; emissive: #1133aa; emissiveIntensity: 0.5; opacity: 0.6; transparent: true"></a-sphere>
     <!-- Planète glacée -->
     <a-sphere position="25 -10 -70" radius="6" color="#aaccff" material="emissive: #334466; emissiveIntensity: 0.3"></a-sphere>
     <!-- Étoile bleue -->
