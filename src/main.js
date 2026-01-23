@@ -4,9 +4,23 @@ import AFRAME from "aframe";
 // Configuration des timings
 const TRAVEL_DURATION = 30000; // 30 secondes entre chaque hyperespace
 const HYPERSPACE_DURATION = 5000; // 5 secondes en hyperespace
+const SOUND_START_BEFORE = 4500; // Son commence 4 secondes avant l'hyperespace
 
 // État actuel
 let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse
+
+// Audio pour l'hyperespace
+const hyperspaceSound = new Audio('./assets/Blender Hyperspace Jump.mp3');
+
+// Fonction pour démarrer le son avant l'hyperespace
+function startHyperspaceSound() {
+  console.log("Starting hyperspace sound...");
+  hyperspaceSound.currentTime = 0;
+  hyperspaceSound.play();
+  
+  // Entrer en hyperespace après 3 secondes
+  setTimeout(enterHyperspace, SOUND_START_BEFORE);
+}
 
 // Fonction pour entrer en hyperespace
 function enterHyperspace() {
@@ -27,6 +41,10 @@ function enterHyperspace() {
 function exitHyperspace() {
   console.log("Exiting hyperspace...");
   
+  // Arrêter le son
+  hyperspaceSound.pause();
+  hyperspaceSound.currentTime = 0;
+  
   // Cacher l'hyperespace
   document.getElementById('hyperspace').setAttribute('visible', 'false');
   
@@ -44,8 +62,8 @@ function exitHyperspace() {
     console.log("Arrived at Blue Nebula");
   }
   
-  // Programmer le prochain saut en hyperespace
-  setTimeout(enterHyperspace, TRAVEL_DURATION);
+  // Programmer le prochain saut en hyperespace (moins 3 secondes pour le son)
+  setTimeout(startHyperspaceSound, TRAVEL_DURATION - SOUND_START_BEFORE);
 }
 
 // Démarrer la boucle après le chargement de la scène
@@ -61,6 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startHyperspaceLoop() {
   console.log("Scene loaded. First hyperspace jump in 30 seconds...");
-  // Premier saut en hyperespace après 30 secondes
-  setTimeout(enterHyperspace, TRAVEL_DURATION);
+  // Premier saut en hyperespace après 30 secondes (moins 3 secondes pour le son)
+  setTimeout(startHyperspaceSound, TRAVEL_DURATION - SOUND_START_BEFORE);
 }
