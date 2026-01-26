@@ -11,12 +11,22 @@
   <a-scene fog="type: exponential; color: #111111; density: 0">
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4"></a-entity>
   <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 90 0" scale="1 0.8 0.8" position="3.84068 0 -0.1906"></a-entity>
-  <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 90 0" scale="1 0.8 0.8" position="3.84068 0 -0.1906"></a-entity>
+  <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 270 0" scale="1 0.8 0.8" position="-3.7751 0 -0.1906"></a-entity>
 
+<a-entity id="light">
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 1.0799 -2.95728" rotation="18 90 0"></a-entity>
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 3.07356 -2.95728" rotation="18 90 0"></a-entity>
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 5.08291 -2.95728" rotation="18 90 0"></a-entity>
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 7.08486 -2.95728" rotation="18 90 0"></a-entity>
+</a-entity>
+
+<a-entity id="light" position="0 0 6.04015">
+  <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 1.0799 -2.95728" rotation="18 90 0"></a-entity>
+  <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 3.07356 -2.95728" rotation="18 90 0"></a-entity>
+  <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 5.08291 -2.95728" rotation="18 90 0"></a-entity>
+  <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 7.08486 -2.95728" rotation="18 90 0"></a-entity>
+</a-entity>
+  
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="3.84861 1.0799 -2.95728" rotation="18 -90 0"></a-entity>
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="3.84861 3.07356 -2.95728" rotation="18 -90 0"></a-entity>
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="3.84861 5.08291 -2.95728" rotation="18 -90 0"></a-entity>
@@ -91,12 +101,16 @@
     </a-entity>
     <!-- Grande nébuleuse bleue/violette -->
     <a-sphere position="0 10 -100" radius="25" material="src: ./assets/Hoth.png" material="color: #2244aa; emissive: #1133aa; emissiveIntensity: 0.5; opacity: 0.6; transparent: true"></a-sphere>
-    <!-- Planète glacée -->
-    <a-sphere position="25 -10 -70" radius="6" color="#aaccff" material="emissive: #334466; emissiveIntensity: 0.3"></a-sphere>
-    <!-- Étoile bleue -->
-    <a-entity position="40 30 -90">
-      <a-sphere radius="4" color="#4488ff" material="emissive: #4488ff; emissiveIntensity: 3"></a-sphere>
-      <a-light type="point" intensity="10" distance="300" decay="0.5" color="#4488ff"></a-light>
+    <!-- Planète glacée - orbite autour de la grande planète -->
+    <a-entity position="0 10 -100" animation="property: rotation; to: 0 360 0; dur:60000; loop: true; easing: linear">
+      <a-sphere position="45 -20 30" radius="6" color="#aaccff" material="src: ./assets/endor.jpg" material="emissive: #334466; emissiveIntensity: 0.3"></a-sphere>
+    </a-entity>
+    <!-- Étoile bleue - orbite autour de la grande planète -->
+    <a-entity position="0 10 -100" animation="property: rotation; to: 0 360 0; dur: 90000; loop: true; easing: linear">
+      <a-entity position="60 30 10">
+        <a-sphere radius="4" color="#4488ff" material="emissive: #4488ff; emissiveIntensity: 3"></a-sphere>
+        <a-light type="point" intensity="10" distance="300" decay="0.5" color="#4488ff"></a-light>
+      </a-entity>
     </a-entity>
   </a-entity>
   
