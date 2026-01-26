@@ -1,7 +1,146 @@
 // File main.js
 import AFRAME from "aframe";
 
-// Configuration des timings
+// ==========================================
+// COMPOSANTS POUR LE SABRE LASER INTERACTIF
+// ==========================================
+
+// Composant pour les objets qu'on peut attraper
+AFRAME.registerComponent('grabbable', {
+  init: function() {
+    this.el.classList.add('grabbable');
+  }
+});
+
+// Composant pour le contrôleur qui attrape les objets
+AFRAME.registerComponent('grabber', {
+  init: function() {
+    this.grabbedEl = null;
+    this.originalParent = null;
+    
+    // Son d'allumage du sabre (optionnel)
+    this.igniteSound = new Audio('./assets/lightsaber-on.mp3');
+    this.igniteSound.volume = 0.5;
+    
+    // Écouter les événements du contrôleur
+    this.el.addEventListener('triggerdown', this.onTriggerDown.bind(this));
+    this.el.addEventListener('triggerup', this.onTriggerUp.bind(this));
+    
+    // Pour le mode desktop/debug avec la souris
+    document.addEventListener('mousedown', this.onMouseDown.bind(this));
+    document.addEventListener('mouseup', this.onMouseUp.bind(this));
+  },
+  
+  onTriggerDown: function(evt) {
+    if (this.grabbedEl) return; // Déjà en train de tenir quelque chose
+    
+    // Vérifier si on touche un objet grabbable via le raycaster
+    const raycaster = this.el.components.raycaster;
+    if (!raycaster) return;
+    
+    const intersections = raycaster.intersections;
+    if (intersections.length > 0) {
+      const intersectedEl = intersections[0].object.el;
+      
+      // Trouver l'élément parent avec la classe grabbable
+      let grabbableEl = intersectedEl;
+      while (grabbableEl && !grabbableEl.classList.contains('grabbable')) {
+        grabbableEl = grabbableEl.parentElement;
+      }
+      
+      if (grabbableEl) {
+        this.grabObject(grabbableEl);
+      }
+    }
+  },
+  
+  onTriggerUp: function(evt) {
+    if (this.grabbedEl) {
+      this.releaseObject();
+    }
+  },
+  
+  onMouseDown: function(evt) {
+    // Mode desktop : cliquer sur le sabre pour le prendre
+    const lightsaber = document.getElementById('lightsaber');
+    if (lightsaber && !this.grabbedEl) {
+      // Vérifier si on a cliqué près du sabre (simplifié pour desktop)
+      const camera = document.querySelector('a-camera') || document.querySelector('[camera]');
+      if (camera) {
+        this.grabObject(lightsaber);
+      }
+    }
+  },
+  
+  onMouseUp: function(evt) {
+    if (this.grabbedEl) {
+      this.releaseObject();
+    }
+  },
+  
+  grabObject: function(el) {
+    console.log("Grabbing lightsaber!");
+    this.grabbedEl = el;
+    this.originalParent = el.parentElement;
+    
+    // Attacher l'objet au contrôleur
+    this.el.appendChild(el);
+    el.setAttribute('position', '0 0 -0.2');
+    el.setAttribute('rotation', '0 0 0');
+    
+    // Allumer la lame du sabre
+    const blade = el.querySelector('#saber-blade');
+    if (blade) {
+      blade.setAttribute('visible', 'true');
+      // Animation d'allumage
+      blade.setAttribute('animation', 'property: scale; from: 1 0.01 1; to: 1 1 1; dur: 200; easing: easeOutQuad');
+      
+      // Jouer le son d'allumage
+      try {
+        this.igniteSound.currentTime = 0;
+        this.igniteSound.play().catch(e => console.log("Audio not ready"));
+      } catch(e) {}
+    }
+    
+    // Émettre un événement
+    el.emit('grabbed');
+  },
+  
+  releaseObject: function() {
+    if (!this.grabbedEl) return;
+    
+    console.log("Releasing lightsaber!");
+    const el = this.grabbedEl;
+    
+    // Éteindre la lame du sabre
+    const blade = el.querySelector('#saber-blade');
+    if (blade) {
+      // Animation d'extinction
+      blade.setAttribute('animation', 'property: scale; from: 1 1 1; to: 1 0.01 1; dur: 150; easing: easeInQuad');
+      
+      // Cacher après l'animation
+      setTimeout(() => {
+        blade.setAttribute('visible', 'false');
+        blade.removeAttribute('animation');
+      }, 150);
+    }
+    
+    // Remettre l'objet à sa place originale
+    const scene = document.querySelector('a-scene');
+    scene.appendChild(el);
+    el.setAttribute('position', '0 0.80605 -0.77946');
+    el.setAttribute('rotation', '90 50 0');
+    
+    // Émettre un événement
+    el.emit('released');
+    
+    this.grabbedEl = null;
+  }
+});
+
+// ==========================================
+// CONFIGURATION DES TIMINGS HYPERESPACE
+// ==========================================
 const TRAVEL_DURATION = 30000; // 30 secondes entre chaque hyperespace
 const HYPERSPACE_DURATION = 5000; // 5 secondes en hyperespace
 const SOUND_START_BEFORE = 4500; // Son commence 4 secondes avant l'hyperespace
