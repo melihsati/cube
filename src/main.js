@@ -8,9 +8,64 @@ const SOUND_START_BEFORE = 4500; // Son commence 4 secondes avant l'hyperespace
 
 // État actuel
 let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse
+let audioStarted = false;
 
 // Audio pour l'hyperespace
 const hyperspaceSound = new Audio('./assets/Blender Hyperspace Jump.mp3');
+
+// Audio de fond (ambiance spatiale)
+const ambientSound = new Audio('./assets/space.mp3');
+ambientSound.loop = true;
+ambientSound.volume = 0.9; // Volume à 90%, ajuste si besoin
+
+// Créer l'overlay de démarrage
+function createStartOverlay() {
+  const overlay = document.createElement('div');
+  overlay.id = 'start-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #000000 0%, #0a0a15 50%, #000000 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+  `;
+  overlay.innerHTML = `
+    <div style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+      <p style="font-size: 1.2rem; color: #FFE81F; letter-spacing: 0.3rem; margin-bottom: 2rem; text-transform: uppercase;">A long time ago in a galaxy far, far away....</p>
+      <h1 style="font-size: 4rem; color: #FFE81F; letter-spacing: 0.8rem; margin-bottom: 0.5rem; text-shadow: 0 0 30px rgba(255, 232, 31, 0.5);">STAR WARS</h1>
+      <p style="font-size: 1.8rem; color: #FFE81F; letter-spacing: 0.4rem; margin-bottom: 0.5rem;">✦</p>
+      <h2 style="font-size: 2.5rem; color: #C9A962; letter-spacing: 0.5rem; font-weight: 300; text-transform: uppercase; margin-bottom: 3rem;">BOUCHERON</h2>
+      <p style="font-size: 1rem; color: #8B8B8B; letter-spacing: 0.2rem; text-transform: uppercase;">Haute Joaillerie</p>
+      <div style="margin-top: 4rem; animation: pulse 2s infinite;">
+        <p style="font-size: 1.1rem; color: #FFE81F; letter-spacing: 0.15rem;">[ Cliquez pour entrer ]</p>
+      </div>
+    </div>
+    <style>
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    </style>
+  `;
+  
+  overlay.addEventListener('click', () => {
+    if (!audioStarted) {
+      audioStarted = true;
+      ambientSound.play();
+      overlay.remove();
+      console.log("Audio started after user interaction");
+    }
+  });
+  
+  document.body.appendChild(overlay);
+}
 
 // Fonction pour démarrer le son avant l'hyperespace
 function startHyperspaceSound() {
@@ -79,6 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startHyperspaceLoop() {
   console.log("Scene loaded. First hyperspace jump in 30 seconds...");
-  // Premier saut en hyperespace après 30 secondes (moins 3 secondes pour le son)
+  
+  // Créer l'overlay pour l'interaction utilisateur
+  createStartOverlay();
+  
+  // Premier saut en hyperespace après 30 secondes (moins 4.5 secondes pour le son)
   setTimeout(startHyperspaceSound, TRAVEL_DURATION - SOUND_START_BEFORE);
 }
