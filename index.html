@@ -9,7 +9,7 @@
   <body>
     <!-- index.html -->
   <a-scene fog="type: exponential; color: #111111; density: 0">
-  <a-entity gltf-model="./assets/Base.glb" scale="4 1 4"></a-entity>
+  <a-entity gltf-model="./assets/Base.glb" scale="4 1 4"></a-entity>Q
   <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 90 0" scale="1 0.8 0.8" position="3.84068 0 -0.1906"></a-entity>
   <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 270 0" scale="1 0.8 0.8" position="-3.7751 0 -0.1906"></a-entity>
   
@@ -180,15 +180,106 @@
   
   <!-- ENVIRONNEMENT 3: Voie Lactée -->
   <a-entity id="env3" visible="false">
-    <!-- Bande de la Voie Lactée - nuage d'étoiles diffus -->
-    <a-entity id="milky-way-band" position="0 5 -60" rotation="0 0 15">
-      <!-- Nuages de gaz colorés -->
-      <a-sphere position="0 0 0" radius="40" material="color: #1a0a2e; emissive: #2d1b4e; emissiveIntensity: 0.3; opacity: 0.4; transparent: true"></a-sphere>
-      <a-sphere position="15 5 -20" radius="25" material="color: #0a1628; emissive: #1a2a48; emissiveIntensity: 0.2; opacity: 0.3; transparent: true"></a-sphere>
-      <a-sphere position="-20 -3 -10" radius="30" material="color: #1e0a28; emissive: #3d1a58; emissiveIntensity: 0.25; opacity: 0.35; transparent: true"></a-sphere>
+    <!-- GALAXIE SPIRALE EN FORME DE SHURIKEN - 8 BRAS -->
+    <a-entity id="milky-way-galaxy" position="0 4 -55" animation="property: rotation; to: 0 0 360; dur: 120000; loop: true; easing: linear">
+      <!-- CŒUR BRILLANT CENTRAL DE LA GALAXIE -->
+      <a-sphere position="0 0 0" radius="0.4" color="#ffffee" material="emissive: #ffffee; emissiveIntensity: 3.5"></a-sphere>
+      <a-sphere position="0 0 0" radius="0.3" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 4"></a-sphere>
+      <a-sphere position="0.15 0.1 0" radius="0.2" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3"></a-sphere>
+      <a-sphere position="-0.12 -0.08 0" radius="0.18" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.8"></a-sphere>
+      <a-sphere position="0.08 -0.12 0" radius="0.15" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 2.6"></a-sphere>
+      <a-sphere position="-0.1 0.12 0" radius="0.16" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.9"></a-sphere>
+      <a-sphere position="0.05 0.05 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.2"></a-sphere>
+      <a-sphere position="-0.05 -0.05 0" radius="0.1" color="#ffffee" material="emissive: #ffffee; emissiveIntensity: 3"></a-sphere>
+      
+      <!-- BRAS 1 - Droite (0°) -->
+      <a-sphere position="1.5 0 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="3 0.8 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="5 2 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="7.5 4 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="10 6.5 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="12.5 9.5 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="14.5 13 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 2 - Haut-droite (45°) -->
+      <a-sphere position="1.1 1.1 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="2.5 2 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="4.2 3.5 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="6.2 5.5 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="8 8 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="9.5 11 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="10.5 14 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 3 - Haut (90°) -->
+      <a-sphere position="0 1.5 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="-0.8 3 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="-2 5 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="-4 7.5 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="-6.5 10 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="-9.5 12.5 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="-13 14.5 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 4 - Haut-gauche (135°) -->
+      <a-sphere position="-1.1 1.1 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="-2 2.5 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="-3.5 4.2 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="-5.5 6.2 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="-8 8 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="-11 9.5 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="-14 10.5 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 5 - Gauche (180°) -->
+      <a-sphere position="-1.5 0 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="-3 -0.8 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="-5 -2 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="-7.5 -4 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="-10 -6.5 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="-12.5 -9.5 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="-14.5 -13 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 6 - Bas-gauche (225°) -->
+      <a-sphere position="-1.1 -1.1 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="-2.5 -2 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="-4.2 -3.5 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="-6.2 -5.5 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="-8 -8 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="-9.5 -11 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="-10.5 -14 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 7 - Bas (270°) -->
+      <a-sphere position="0 -1.5 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="0.8 -3 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="2 -5 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="4 -7.5 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="6.5 -10 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="9.5 -12.5 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="13 -14.5 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- BRAS 8 - Bas-droite (315°) -->
+      <a-sphere position="1.1 -1.1 0" radius="0.12" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.4"></a-sphere>
+      <a-sphere position="2 -2.5 0" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.2"></a-sphere>
+      <a-sphere position="3.5 -4.2 0" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="5.5 -6.2 0" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="8 -8 0" radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="11 -9.5 0" radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.4"></a-sphere>
+      <a-sphere position="14 -10.5 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.2"></a-sphere>
+      
+      <!-- Étoiles entre les bras pour remplir -->
+      <a-sphere position="0.8 0.3 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="-0.3 0.8 0" radius="0.05" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.9"></a-sphere>
+      <a-sphere position="-0.8 -0.3 0" radius="0.05" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.9"></a-sphere>
+      <a-sphere position="0.3 -0.8 0" radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="0.6 0.6 0" radius="0.04" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="-0.6 0.6 0" radius="0.04" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.7"></a-sphere>
+      <a-sphere position="-0.6 -0.6 0" radius="0.04" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.7"></a-sphere>
+      <a-sphere position="0.6 -0.6 0" radius="0.04" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="2 1.5 0" radius="0.03" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="-1.5 2 0" radius="0.03" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.5"></a-sphere>
+      <a-sphere position="-2 -1.5 0" radius="0.03" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.5"></a-sphere>
+      <a-sphere position="1.5 -2 0" radius="0.03" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
     </a-entity>
     
-    <!-- Étoiles statiques de fond -->
+    <!-- Étoiles dispersées autour -->
     <a-entity id="stars3-background">
       <a-sphere position="15 25 -45" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
       <a-sphere position="-22 18 -50" radius="0.1" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2"></a-sphere>
@@ -202,51 +293,98 @@
       <a-sphere position="-25 -15 -55" radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
       <a-sphere position="12 30 -50" radius="0.1" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 2"></a-sphere>
       <a-sphere position="-8 -20 -45" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <!-- Étoiles supplémentaires dispersées -->
+      <a-sphere position="40 12 -38" radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="-35 22 -48" radius="0.07" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.7"></a-sphere>
+      <a-sphere position="25 -18 -52" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.9"></a-sphere>
+      <a-sphere position="-42 8 -42" radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.6"></a-sphere>
+      <a-sphere position="32 28 -35" radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2"></a-sphere>
+      <a-sphere position="-28 -8 -58" radius="0.07" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 1.8"></a-sphere>
+      <a-sphere position="18 35 -42" radius="0.08" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 1.9"></a-sphere>
+      <a-sphere position="-15 -25 -48" radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 1.7"></a-sphere>
     </a-entity>
     
-    <!-- CASCADE D'ÉTOILES FILANTES -->
+    <!-- CASCADE D'ÉTOILES FILANTES - SPECTACULAIRE -->
     <a-entity id="star-cascade">
-      <!-- Cascade principale - étoiles tombant en diagonale -->
-      <a-sphere radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="25 35 -30"
-        animation="property: position; to: -25 -15 -50; dur: 3000; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.05" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3" position="20 40 -35"
-        animation="property: position; to: -30 -10 -55; dur: 3500; delay: 200; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="30 32 -28"
-        animation="property: position; to: -20 -18 -48; dur: 2800; delay: 500; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.04" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3" position="15 38 -32"
-        animation="property: position; to: -35 -12 -52; dur: 3200; delay: 800; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.06" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 3" position="28 36 -25"
-        animation="property: position; to: -22 -14 -45; dur: 2600; delay: 1100; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="22 42 -38"
-        animation="property: position; to: -28 -8 -58; dur: 3800; delay: 1400; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.08" color="#ffddcc" material="emissive: #ffddcc; emissiveIntensity: 3" position="35 30 -22"
-        animation="property: position; to: -15 -20 -42; dur: 2400; delay: 1700; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.04" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="18 44 -40"
-        animation="property: position; to: -32 -6 -60; dur: 4000; delay: 2000; loop: true; easing: linear"></a-sphere>
+      <!-- GROSSES ÉTOILES FILANTES - très visibles -->
+      <a-sphere radius="0.15" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 4" position="30 40 -25"
+        animation="property: position; to: -40 -20 -55; dur: 2000; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.12" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 4" position="25 45 -30"
+        animation="property: position; to: -45 -15 -60; dur: 2200; delay: 300; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.14" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 4" position="35 38 -22"
+        animation="property: position; to: -35 -22 -52; dur: 1800; delay: 600; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.13" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 4" position="20 50 -28"
+        animation="property: position; to: -50 -10 -58; dur: 2400; delay: 900; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.16" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 4" position="40 35 -20"
+        animation="property: position; to: -30 -25 -50; dur: 1600; delay: 1200; loop: true; easing: linear"></a-sphere>
+      
+      <!-- TRAÎNÉES LUMINEUSES - cylindres allongés pour effet de vitesse -->
+      <a-cylinder radius="0.02" height="3" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="28 42 -26" rotation="45 0 -45"
+        animation="property: position; to: -42 -18 -56; dur: 1800; loop: true; easing: linear"></a-cylinder>
+      <a-cylinder radius="0.02" height="2.5" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3" position="22 48 -32" rotation="45 0 -45"
+        animation="property: position; to: -48 -12 -62; dur: 2100; delay: 400; loop: true; easing: linear"></a-cylinder>
+      <a-cylinder radius="0.025" height="3.5" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="38 36 -18" rotation="45 0 -45"
+        animation="property: position; to: -32 -24 -48; dur: 1500; delay: 800; loop: true; easing: linear"></a-cylinder>
+      <a-cylinder radius="0.02" height="2.8" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3" position="18 52 -35" rotation="45 0 -45"
+        animation="property: position; to: -52 -8 -65; dur: 2500; delay: 1100; loop: true; easing: linear"></a-cylinder>
+      <a-cylinder radius="0.022" height="3.2" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 3" position="32 40 -24" rotation="45 0 -45"
+        animation="property: position; to: -38 -20 -54; dur: 1700; delay: 1400; loop: true; easing: linear"></a-cylinder>
+      
+      <!-- Cascade principale - étoiles moyennes -->
+      <a-sphere radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.5" position="25 35 -30"
+        animation="property: position; to: -25 -15 -50; dur: 2500; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.07" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3.5" position="20 40 -35"
+        animation="property: position; to: -30 -10 -55; dur: 2800; delay: 200; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.5" position="30 32 -28"
+        animation="property: position; to: -20 -18 -48; dur: 2300; delay: 500; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3.5" position="15 38 -32"
+        animation="property: position; to: -35 -12 -52; dur: 2600; delay: 800; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.08" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 3.5" position="28 36 -25"
+        animation="property: position; to: -22 -14 -45; dur: 2100; delay: 1100; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.5" position="22 42 -38"
+        animation="property: position; to: -28 -8 -58; dur: 3000; delay: 1400; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.1" color="#ffddcc" material="emissive: #ffddcc; emissiveIntensity: 3.5" position="35 30 -22"
+        animation="property: position; to: -15 -20 -42; dur: 1900; delay: 1700; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.5" position="18 44 -40"
+        animation="property: position; to: -32 -6 -60; dur: 3200; delay: 2000; loop: true; easing: linear"></a-sphere>
       
       <!-- Deuxième vague de cascade -->
-      <a-sphere radius="0.05" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3" position="32 28 -26"
-        animation="property: position; to: -18 -22 -46; dur: 2900; delay: 400; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="12 46 -42"
-        animation="property: position; to: -38 -4 -62; dur: 4200; delay: 600; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.04" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3" position="26 34 -30"
-        animation="property: position; to: -24 -16 -50; dur: 3100; delay: 900; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.07" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 3" position="38 26 -20"
-        animation="property: position; to: -12 -24 -40; dur: 2200; delay: 1200; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="16 40 -36"
-        animation="property: position; to: -34 -10 -56; dur: 3600; delay: 1500; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.06" color="#ffddaa" material="emissive: #ffddaa; emissiveIntensity: 3" position="24 38 -28"
-        animation="property: position; to: -26 -12 -48; dur: 2700; delay: 1800; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.07" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3.5" position="32 28 -26"
+        animation="property: position; to: -18 -22 -46; dur: 2400; delay: 400; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.08" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.5" position="12 46 -42"
+        animation="property: position; to: -38 -4 -62; dur: 3400; delay: 600; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.06" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3.5" position="26 34 -30"
+        animation="property: position; to: -24 -16 -50; dur: 2500; delay: 900; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.09" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 3.5" position="38 26 -20"
+        animation="property: position; to: -12 -24 -40; dur: 1800; delay: 1200; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.07" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3.5" position="16 40 -36"
+        animation="property: position; to: -34 -10 -56; dur: 2900; delay: 1500; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.08" color="#ffddaa" material="emissive: #ffddaa; emissiveIntensity: 3.5" position="24 38 -28"
+        animation="property: position; to: -26 -12 -48; dur: 2200; delay: 1800; loop: true; easing: linear"></a-sphere>
       
-      <!-- Troisième vague plus lente et dispersée -->
-      <a-sphere radius="0.03" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.5" position="10 50 -45"
-        animation="property: position; to: -40 0 -65; dur: 5000; delay: 300; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.04" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 2.5" position="40 22 -18"
-        animation="property: position; to: -10 -28 -38; dur: 2000; delay: 700; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.03" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 2.5" position="14 48 -44"
-        animation="property: position; to: -36 -2 -64; dur: 4600; delay: 1000; loop: true; easing: linear"></a-sphere>
-      <a-sphere radius="0.05" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 2.5" position="36 24 -24"
-        animation="property: position; to: -14 -26 -44; dur: 2500; delay: 1300; loop: true; easing: linear"></a-sphere>
+      <!-- Vague rapide et brillante -->
+      <a-sphere radius="0.11" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 4" position="42 32 -18"
+        animation="property: position; to: -28 -28 -48; dur: 1400; delay: 100; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.1" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 4" position="36 44 -24"
+        animation="property: position; to: -34 -16 -54; dur: 1600; delay: 500; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.12" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 4" position="44 28 -16"
+        animation="property: position; to: -26 -32 -46; dur: 1300; delay: 850; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.09" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 4" position="30 48 -30"
+        animation="property: position; to: -40 -12 -60; dur: 1900; delay: 1150; loop: true; easing: linear"></a-sphere>
+      
+      <!-- Petites étoiles rapides en arrière-plan -->
+      <a-sphere radius="0.04" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="10 50 -45"
+        animation="property: position; to: -40 0 -65; dur: 3500; delay: 300; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.05" color="#aaddff" material="emissive: #aaddff; emissiveIntensity: 3" position="40 22 -18"
+        animation="property: position; to: -10 -28 -38; dur: 1500; delay: 700; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.04" color="#ffeedd" material="emissive: #ffeedd; emissiveIntensity: 3" position="14 48 -44"
+        animation="property: position; to: -36 -2 -64; dur: 3800; delay: 1000; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.06" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="36 24 -24"
+        animation="property: position; to: -14 -26 -44; dur: 2000; delay: 1300; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.05" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 3" position="8 54 -48"
+        animation="property: position; to: -42 4 -68; dur: 4000; delay: 1600; loop: true; easing: linear"></a-sphere>
+      <a-sphere radius="0.04" color="#ffffff" material="emissive: #ffffff; emissiveIntensity: 3" position="45 20 -15"
+        animation="property: position; to: -5 -30 -35; dur: 1200; delay: 1900; loop: true; easing: linear"></a-sphere>
     </a-entity>
     
     <!-- Centre galactique lumineux -->
@@ -269,6 +407,37 @@
         animation="property: material.emissiveIntensity; from: 2; to: 0.4; dur: 1000; dir: alternate; loop: true"></a-sphere>
       <a-sphere position="18 5 -26" radius="0.11" color="#aaccff" material="emissive: #aaccff; emissiveIntensity: 2"
         animation="property: material.emissiveIntensity; from: 2; to: 0.5; dur: 1400; dir: alternate; loop: true"></a-sphere>
+    </a-entity>
+    
+    <!-- FLOTTE DE STAR DESTROYERS -->
+    <a-entity id="imperial-fleet">
+      <!-- Vaisseau amiral - le plus grand, au centre -->
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.8 0.8 0.8" position="0 8 -60" rotation="0 180 0"
+        animation="property: position; from: 40 8 -60; to: -60 8 -60; dur: 45000; loop: true; easing: linear"></a-entity>
+      
+      <!-- Formation en V - aile gauche -->
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.5 0.5 0.5" position="-15 6 -50" rotation="0 175 0"
+        animation="property: position; from: 25 6 -50; to: -75 6 -50; dur: 45000; loop: true; easing: linear"></a-entity>
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.4 0.4 0.4" position="-28 4 -42" rotation="0 170 0"
+        animation="property: position; from: 12 4 -42; to: -88 4 -42; dur: 45000; loop: true; easing: linear"></a-entity>
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.35 0.35 0.35" position="-38 10 -48" rotation="0 178 0"
+        animation="property: position; from: 2 10 -48; to: -98 10 -48; dur: 45000; loop: true; easing: linear"></a-entity>
+      
+      <!-- Formation en V - aile droite -->
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.5 0.5 0.5" position="15 5 -52" rotation="0 185 0"
+        animation="property: position; from: 55 5 -52; to: -45 5 -52; dur: 45000; loop: true; easing: linear"></a-entity>
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.4 0.4 0.4" position="25 7 -45" rotation="0 182 0"
+        animation="property: position; from: 65 7 -45; to: -35 7 -45; dur: 45000; loop: true; easing: linear"></a-entity>
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.35 0.35 0.35" position="35 3 -40" rotation="0 188 0"
+        animation="property: position; from: 75 3 -40; to: -25 3 -40; dur: 45000; loop: true; easing: linear"></a-entity>
+      
+      <!-- Vaisseaux d'escorte en arrière-plan (plus petits, plus loin) -->
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.25 0.25 0.25" position="-10 12 -70" rotation="0 180 0"
+        animation="property: position; from: 30 12 -70; to: -70 12 -70; dur: 50000; loop: true; easing: linear"></a-entity>
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.25 0.25 0.25" position="20 2 -68" rotation="0 180 0"
+        animation="property: position; from: 60 2 -68; to: -40 2 -68; dur: 50000; loop: true; easing: linear"></a-entity>
+      <a-entity gltf-model="./assets/Star_Destroyer.glb" scale="0.2 0.2 0.2" position="5 15 -75" rotation="0 180 0"
+        animation="property: position; from: 45 15 -75; to: -55 15 -75; dur: 55000; loop: true; easing: linear"></a-entity>
     </a-entity>
   </a-entity>
   
