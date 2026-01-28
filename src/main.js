@@ -7,7 +7,7 @@ const HYPERSPACE_DURATION = 5000; // 5 secondes en hyperespace
 const SOUND_START_BEFORE = 4500; // Son commence 4 secondes avant l'hyperespace
 
 // État actuel
-let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse
+let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse, 3 = Voie Lactée
 let audioStarted = false;
 
 // Audio pour l'hyperespace
@@ -81,9 +81,10 @@ function startHyperspaceSound() {
 function enterHyperspace() {
   console.log("Entering hyperspace...");
   
-  // Cacher l'environnement actuel
+  // Cacher tous les environnements
   document.getElementById('env1').setAttribute('visible', 'false');
   document.getElementById('env2').setAttribute('visible', 'false');
+  document.getElementById('env3').setAttribute('visible', 'false');
   
   // Afficher l'hyperespace (les animations A-Frame se lancent automatiquement)
   document.getElementById('hyperspace').setAttribute('visible', 'true');
@@ -103,18 +104,24 @@ function exitHyperspace() {
   // Cacher l'hyperespace
   document.getElementById('hyperspace').setAttribute('visible', 'false');
   
-  // Changer d'environnement
-  currentEnv = currentEnv === 1 ? 2 : 1;
+  // Changer d'environnement (cycle: 1 -> 2 -> 3 -> 1)
+  currentEnv = currentEnv === 3 ? 1 : currentEnv + 1;
+  
+  // Cacher tous les environnements d'abord
+  document.getElementById('env1').setAttribute('visible', 'false');
+  document.getElementById('env2').setAttribute('visible', 'false');
+  document.getElementById('env3').setAttribute('visible', 'false');
   
   // Afficher le nouvel environnement
   if (currentEnv === 1) {
     document.getElementById('env1').setAttribute('visible', 'true');
-    document.getElementById('env2').setAttribute('visible', 'false');
     console.log("Arrived at Tatooine");
-  } else {
-    document.getElementById('env1').setAttribute('visible', 'false');
+  } else if (currentEnv === 2) {
     document.getElementById('env2').setAttribute('visible', 'true');
     console.log("Arrived at Blue Nebula");
+  } else {
+    document.getElementById('env3').setAttribute('visible', 'true');
+    console.log("Arrived at Milky Way");
   }
   
   // Programmer le prochain saut en hyperespace (moins 3 secondes pour le son)
