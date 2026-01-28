@@ -10,9 +10,49 @@
     <!-- index.html -->
   <a-scene fog="type: exponential; color: #111111; density: 0">
   <a-entity gltf-model="./assets/Base.glb" scale="4 1 4"></a-entity>
-  <a-entity gltf-model="./assets/lightsaber.glb" position="0 0.80605 -0.77946" scale="0.3 0.3 0.3" rotation="90 50 0"></a-entity>
   <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 90 0" scale="1 0.8 0.8" position="3.84068 0 -0.1906"></a-entity>
   <a-entity gltf-model="./assets/control_panel2.glb" rotation="0 270 0" scale="1 0.8 0.8" position="-3.7751 0 -0.1906"></a-entity>
+  
+  <!-- Boutons lumineux panneau droit -->
+  <a-entity id="buttons-right" position="3.5 0 -0.1906">
+    <!-- Rangée de boutons lumineux avec clignotement -->
+    <a-sphere radius="0.04" position="0.12475 1.03667 0.3265" material="color: #00ff00; emissive: #00ff00; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 800; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.04" position="0.12257 0.9206 -0.31042" material="color: #ff0000; emissive: #ff0000; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 1200; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.04" position="0.13292 1.02936 -1.21713" material="color: #00aaff; emissive: #00aaff; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 500; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.03" position="0.10704 0.92153 1.67935" material="color: #ffaa00; emissive: #ffaa00; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.2; dur: 2000; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.03" position="0.1247 1.03876 -1.69772" material="color: #ff00ff; emissive: #ff00ff; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 700; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.03" position="0.0982 0.91913 1.79217" material="color: #00ffaa; emissive: #00ffaa; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.15; dur: 1500; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.035" position="0.12733 1.03869 0.70826" material="color: #ffff00; emissive: #ffff00; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 400; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.035" position="0.09252 0.92394 -0.063" material="color: #ff5500; emissive: #ff5500; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.2; dur: 1800; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+  </a-entity>
+  
+ <a-entity id="buttons-left" position="-3.41706 0.04259 -0.1906">
+    <!-- Rangée de boutons lumineux avec clignotement (miroir du côté droit) -->
+    <a-sphere radius="0.04" position="-0.12475 0.87286 0.30684" material="color: #00ff00; emissive: #00ff00; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 900; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.04" position="-0.13095 0.99081 -0.3268" material="color: #ff0000; emissive: #ff0000; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 1100; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.04" position="-0.14619 0.98775 -0.52063" material="color: #00aaff; emissive: #00aaff; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 600; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.03" position="-0.1174 0.87461 -1.79371" material="color: #ffaa00; emissive: #ffaa00; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.2; dur: 1700; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.03" position="-0.14048 0.99602 1.08754" material="color: #ff00ff; emissive: #ff00ff; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 650; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.03" position="-0.13164 0.9935 1.33391" material="color: #00ffaa; emissive: #00ffaa; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.15; dur: 1400; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.035" position="-0.12733 0.87823 -1.68182" material="color: #ffff00; emissive: #ffff00; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.1; dur: 450; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+    <a-sphere radius="0.035" position="-0.13213 0.87286 0.18473" material="color: #ff5500; emissive: #ff5500; emissiveIntensity: 0.8; roughness: 0.3"
+      animation="property: material.emissiveIntensity; from: 0.8; to: 0.2; dur: 1600; dir: alternate; loop: true; easing: easeInOutSine"></a-sphere>
+  </a-entity>
 
 <a-entity id="light">
   <a-entity gltf-model="./assets/light2.glb" scale="0.03 0.02 0.02" position="-3.84861 1.0799 -2.95728" rotation="18 90 0"></a-entity>
