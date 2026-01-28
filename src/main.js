@@ -18,6 +18,40 @@ const ambientSound = new Audio('./assets/space.mp3');
 ambientSound.loop = true;
 ambientSound.volume = 0.9; // Volume à 90%, ajuste si besoin
 
+// Audio des bips technologiques du cockpit
+const beepSound = new Audio('./assets/Sci-Fi Computer Interface Sound Effect ~ Beeps, Data Processing Sound.m4a');
+beepSound.volume = 0.15; // Volume bas pour ambiance subtile
+
+// Fonction pour jouer un extrait aléatoire de 2-3 secondes du son bip
+function playRandomBeep() {
+  if (!audioStarted) return;
+  
+  // Durée aléatoire entre 2 et 3 secondes
+  const duration = 2 + Math.random();
+  
+  // Position de départ aléatoire (en laissant de la marge pour la durée)
+  // On suppose que le fichier fait au moins 10 secondes
+  const maxStart = Math.max(0, beepSound.duration - duration - 1);
+  const startTime = Math.random() * maxStart;
+  
+  beepSound.currentTime = startTime;
+  beepSound.play();
+  
+  // Arrêter après la durée choisie
+  setTimeout(() => {
+    beepSound.pause();
+  }, duration * 1000);
+  
+  // Programmer le prochain bip (entre 10 et 25 secondes)
+  const nextBeepDelay = 10000 + Math.random() * 15000;
+  setTimeout(playRandomBeep, nextBeepDelay);
+}
+
+// Démarrer les bips quand le son sera chargé
+beepSound.addEventListener('loadedmetadata', () => {
+  console.log("Beep sound loaded, duration:", beepSound.duration);
+});
+
 // Créer l'overlay de démarrage
 function createStartOverlay() {
   const overlay = document.createElement('div');
@@ -59,6 +93,10 @@ function createStartOverlay() {
     if (!audioStarted) {
       audioStarted = true;
       ambientSound.play();
+      
+      // Démarrer les bips après un court délai
+      setTimeout(playRandomBeep, 2000);
+      
       overlay.remove();
       console.log("Audio started after user interaction");
     }
