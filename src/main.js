@@ -58,7 +58,7 @@ function startCameraShake() {
   const cameraRig = document.getElementById('camera-rig');
   if (!cameraRig) return;
   
-  const basePosition = { x: 0, y: 1.6, z: 0 };
+  const basePosition = { x: 0, y: 0, z: 0 }; // Y=0 car la caméra gère sa propre hauteur
   const shakeIntensity = 0.08; // Intensité du shake
   
   shakeInterval = setInterval(() => {
@@ -94,7 +94,7 @@ function stopCameraShake() {
   const cameraRig = document.getElementById('camera-rig');
   if (cameraRig) {
     // Retour en douceur à la position initiale
-    cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0 });
+    cameraRig.setAttribute('position', { x: 0, y: 0, z: 0 });
     cameraRig.setAttribute('rotation', { x: 0, y: 0, z: 0 });
   }
 }
