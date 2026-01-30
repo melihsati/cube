@@ -174,6 +174,18 @@ function enterHyperspace() {
   // Afficher l'hyperespace (les animations A-Frame se lancent automatiquement)
   document.getElementById('hyperspace').setAttribute('visible', 'true');
   
+  // Élargir le champ de vision progressivement
+  const camera = document.getElementById('main-camera');
+  if (camera) {
+    camera.setAttribute('animation__fov', {
+      property: 'fov',
+      from: 80,
+      to: 110,
+      dur: 1500,
+      easing: 'easeInOutQuad'
+    });
+  }
+  
   // Démarrer le tremblement de la caméra
   startCameraShake();
   
@@ -184,6 +196,18 @@ function enterHyperspace() {
 // Fonction pour sortir de l'hyperespace
 function exitHyperspace() {
   console.log("Exiting hyperspace...");
+  
+  // Rétrécir le champ de vision progressivement
+  const camera = document.getElementById('main-camera');
+  if (camera) {
+    camera.setAttribute('animation__fov', {
+      property: 'fov',
+      from: 110,
+      to: 80,
+      dur: 1500,
+      easing: 'easeInOutQuad'
+    });
+  }
   
   // Arrêter le tremblement de la caméra
   stopCameraShake();
