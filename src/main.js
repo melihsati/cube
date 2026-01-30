@@ -9,6 +9,7 @@ const SOUND_START_BEFORE = 4500; // Son commence 4 secondes avant l'hyperespace
 // État actuel
 let currentEnv = 1; // 1 = Tatooine, 2 = Nébuleuse, 3 = Voie Lactée
 let audioStarted = false;
+let shakeInterval = null; // Pour stocker l'intervalle du shake
 
 // Audio pour l'hyperespace
 const hyperspaceSound = new Audio('./assets/Blender Hyperspace Jump.mp3');
@@ -51,6 +52,52 @@ function playRandomBeep() {
 beepSound.addEventListener('loadedmetadata', () => {
   console.log("Beep sound loaded, duration:", beepSound.duration);
 });
+
+// Fonction pour démarrer le tremblement de la caméra
+function startCameraShake() {
+  const cameraRig = document.getElementById('camera-rig');
+  if (!cameraRig) return;
+  
+  const basePosition = { x: 0, y: 1.6, z: 0 };
+  const shakeIntensity = 0.08; // Intensité du shake
+  
+  shakeInterval = setInterval(() => {
+    const offsetX = (Math.random() - 0.5) * 2 * shakeIntensity;
+    const offsetY = (Math.random() - 0.5) * 2 * shakeIntensity;
+    const offsetZ = (Math.random() - 0.5) * 2 * shakeIntensity * 0.5;
+    
+    // Ajout d'une légère rotation pour plus de réalisme
+    const rotX = (Math.random() - 0.5) * 1.5;
+    const rotZ = (Math.random() - 0.5) * 1.5;
+    
+    cameraRig.setAttribute('position', {
+      x: basePosition.x + offsetX,
+      y: basePosition.y + offsetY,
+      z: basePosition.z + offsetZ
+    });
+    
+    cameraRig.setAttribute('rotation', {
+      x: rotX,
+      y: 0,
+      z: rotZ
+    });
+  }, 50); // Mise à jour toutes les 50ms pour un effet fluide
+}
+
+// Fonction pour arrêter le tremblement
+function stopCameraShake() {
+  if (shakeInterval) {
+    clearInterval(shakeInterval);
+    shakeInterval = null;
+  }
+  
+  const cameraRig = document.getElementById('camera-rig');
+  if (cameraRig) {
+    // Retour en douceur à la position initiale
+    cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0 });
+    cameraRig.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+  }
+}
 
 // Créer l'overlay de démarrage
 function createStartOverlay() {
@@ -127,6 +174,9 @@ function enterHyperspace() {
   // Afficher l'hyperespace (les animations A-Frame se lancent automatiquement)
   document.getElementById('hyperspace').setAttribute('visible', 'true');
   
+  // Démarrer le tremblement de la caméra
+  startCameraShake();
+  
   // Après 5 secondes, sortir de l'hyperespace
   setTimeout(exitHyperspace, HYPERSPACE_DURATION);
 }
@@ -134,6 +184,9 @@ function enterHyperspace() {
 // Fonction pour sortir de l'hyperespace
 function exitHyperspace() {
   console.log("Exiting hyperspace...");
+  
+  // Arrêter le tremblement de la caméra
+  stopCameraShake();
   
   // Arrêter le son
   hyperspaceSound.pause();
