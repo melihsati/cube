@@ -1,6 +1,146 @@
 // File main.js
 import AFRAME from "aframe";
 
+// Composant de vignette pour effet d'élargissement du champ de vision (compatible VR)
+AFRAME.registerComponent('vignette-effect', {
+  schema: {
+    intensity: { type: 'number', default: 0.8 },  // 0 = pas de vignette, 1 = vignette max
+    softness: { type: 'number', default: 0.4 },
+    color: { type: 'color', default: '#000000' }
+  },
+
+  init: function () {
+    // Créer le shader de vignette
+    const vertexShader = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      varying vec2 vUv;
+      uniform float intensity;
+      uniform float softness;
+      uniform vec3 color;
+      
+      void main() {
+        vec2 uv = vUv;
+        vec2 center = vec2(0.5, 0.5);
+        float dist = distance(uv, center);
+        
+        // Calculer la vignette inversée (plus sombre sur les bords)
+        float vignette = smoothstep(0.2, 0.5 + softness, dist);
+        vignette = vignette * intensity;
+        
+        gl_FragColor = vec4(color, vignette);
+      }
+    `;
+
+    // Créer le matériau shader
+    this.material = new THREE.ShaderMaterial({
+      uniforms: {
+        intensity: { value: this.data.intensity },
+        softness: { value: this.data.softness },
+        color: { value: new THREE.Color(this.data.color) }
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      transparent: true,
+      depthTest: false,
+      depthWrite: false
+    });
+
+    // Créer un plan qui couvre la vue
+    const geometry = new THREE.PlaneGeometry(2, 2);
+    this.mesh = new THREE.Mesh(geometry, this.material);
+    this.mesh.frustumCulled = false;
+    this.mesh.renderOrder = 9999;
+    
+    this.el.setObject3D('vignette', this.mesh);
+  },
+
+  update: function () {
+    if (this.material) {
+      this.material.uniforms.intensity.value = this.data.intensity;
+      this.material.uniforms.softness.value = this.data.softness;
+      this.material.uniforms.color.value.set(this.data.color);
+    }
+  },
+
+  remove: function () {
+    this.el.removeObject3D('vignette');
+  }
+});
+
+// Variables pour l'animation de la vignette
+let vignetteAnimationId = null;
+
+// Fonction pour animer la vignette (ouverture = FOV qui s'élargit)
+function animateVignetteOpen(duration = 1500) {
+  const vignetteEl = document.getElementById('vignette-overlay');
+  if (!vignetteEl) return;
+  
+  const startTime = performance.now();
+  const startIntensity = 0.85;
+  const endIntensity = 0.2;
+  
+  function animate() {
+    const elapsed = performance.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Easing easeOutQuad
+    const eased = 1 - (1 - progress) * (1 - progress);
+    const currentIntensity = startIntensity + (endIntensity - startIntensity) * eased;
+    
+    vignetteEl.setAttribute('vignette-effect', 'intensity', currentIntensity);
+    
+    if (progress < 1) {
+      vignetteAnimationId = requestAnimationFrame(animate);
+    }
+  }
+  
+  if (vignetteAnimationId) cancelAnimationFrame(vignetteAnimationId);
+  animate();
+}
+
+// Fonction pour animer la vignette (fermeture = retour à la normale)
+function animateVignetteClose(duration = 1500) {
+  const vignetteEl = document.getElementById('vignette-overlay');
+  if (!vignetteEl) return;
+  
+  const startTime = performance.now();
+  const startIntensity = 0.2;
+  const endIntensity = 0;
+  
+  function animate() {
+    const elapsed = performance.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Easing easeInQuad
+    const eased = progress * progress;
+    const currentIntensity = startIntensity + (endIntensity - startIntensity) * eased;
+    
+    vignetteEl.setAttribute('vignette-effect', 'intensity', currentIntensity);
+    
+    if (progress < 1) {
+      vignetteAnimationId = requestAnimationFrame(animate);
+    }
+  }
+  
+  if (vignetteAnimationId) cancelAnimationFrame(vignetteAnimationId);
+  animate();
+}
+
+// Fonction pour préparer la vignette avant l'hyperespace
+function prepareVignetteForHyperspace() {
+  const vignetteEl = document.getElementById('vignette-overlay');
+  if (vignetteEl) {
+    vignetteEl.setAttribute('vignette-effect', 'intensity', 0.85);
+  }
+}
+
 // Configuration des timings
 const TRAVEL_DURATION = 30000; // 30 secondes entre chaque hyperespace
 const HYPERSPACE_DURATION = 5000; // 5 secondes en hyperespace
@@ -158,6 +298,9 @@ function startHyperspaceSound() {
   hyperspaceSound.currentTime = 0;
   hyperspaceSound.play();
   
+  // Préparer la vignette pour l'effet d'ouverture
+  prepareVignetteForHyperspace();
+  
   // Entrer en hyperespace après 3 secondes
   setTimeout(enterHyperspace, SOUND_START_BEFORE);
 }
@@ -174,7 +317,7 @@ function enterHyperspace() {
   // Afficher l'hyperespace (les animations A-Frame se lancent automatiquement)
   document.getElementById('hyperspace').setAttribute('visible', 'true');
   
-  // Élargir le champ de vision progressivement
+  // Élargir le champ de vision progressivement (desktop)
   const camera = document.getElementById('main-camera');
   if (camera) {
     camera.setAttribute('animation__fov', {
@@ -185,6 +328,9 @@ function enterHyperspace() {
       easing: 'easeInOutQuad'
     });
   }
+  
+  // Animer la vignette (VR et desktop) - effet d'ouverture
+  animateVignetteOpen(1500);
   
   // Démarrer le tremblement de la caméra
   startCameraShake();
@@ -197,7 +343,7 @@ function enterHyperspace() {
 function exitHyperspace() {
   console.log("Exiting hyperspace...");
   
-  // Rétrécir le champ de vision progressivement
+  // Rétrécir le champ de vision progressivement (desktop)
   const camera = document.getElementById('main-camera');
   if (camera) {
     camera.setAttribute('animation__fov', {
@@ -208,6 +354,9 @@ function exitHyperspace() {
       easing: 'easeInOutQuad'
     });
   }
+  
+  // Animer la vignette (VR et desktop) - effet de fermeture
+  animateVignetteClose(1500);
   
   // Arrêter le tremblement de la caméra
   stopCameraShake();
